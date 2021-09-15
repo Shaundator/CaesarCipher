@@ -2,7 +2,7 @@ package Projekt;
 
 import java.util.Scanner;
 
-public class Main {
+public class CaesarCipher {
 
     public static void main(String[] args) {
         int userChoice;
@@ -49,7 +49,7 @@ public class Main {
         String result = caesarCrypt(userPlaintext,(-userShift));
         System.out.println("Den dekrypterede besked er: ");
         System.out.println(result);
-    }
+    } //Den eneste forskel er at der bliver sat "-" foran shiftværdien
     public static String caesarCrypt( String ciphertext, int shift){
         int[] numberList = textToListOfNumbers(ciphertext);
         int[] numberListShifted = shiftListOfNumbers(numberList,shift);
