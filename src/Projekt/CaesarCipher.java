@@ -6,40 +6,70 @@ import java.util.Scanner;
 public class CaesarCipher {
 
     public static void main(String[] args) {
-        int userChoice;
         Scanner sc = new Scanner(System.in);
-        boolean goOn = true;
-        while (goOn) {
-            System.out.println("""
-                    Indtast et tal:
-                    4: Krypter Besked til Tal
-                    3: Dekrypter Tal til Besked
-                    2: Krypter Besked
-                    1: Dekrypter Besked
-                    0: Afslutter programmet\s""");
-            userChoice = sc.nextInt();
+        int userChoice;
+        int userMenuChoice;
 
-            if(userChoice == 4){
-                encryptNumbers();
+        boolean mainMenu = true;
+        while(mainMenu) {
+            System.out.println("""
+                    
+                    Vælg en krypteringsmenu
+                    2: Tal til tekst kryptering
+                    1: Tekst til tekst kryptering""");
+            userMenuChoice = sc.nextInt();
+            if (userMenuChoice == 2) {
+                boolean goOn = true;
+                while (goOn) {
+                    System.out.println("""
+                            
+                            Indtast et tal:
+                            2: Krypter Besked
+                            1: Dekrypter Besked
+                            0: Tilbage til hovedmenu\s""");
+                    userChoice = sc.nextInt();
+                    if (userChoice == 2) {
+                        encryptNumbers();
+                    } else if (userChoice == 1) {
+                        decryptNumbers();
+                    } else if (userChoice == 0) {
+                        goOn = false;
+                    } else {
+                        System.out.println("Du indtastede: " + userChoice);
+                    }
+                }
             }
-            else if (userChoice == 3){
-                decryptNumbers();
+            else if (userMenuChoice == 1) {
+                boolean goOn = true;
+                while (goOn) {
+                    System.out.println("""
+                            
+                            Indtast et tal:
+                            2: Krypter Besked
+                            1: Dekrypter Besked
+                            0: tilbage til hovedmenu\s""");
+                    userChoice = sc.nextInt();
+                    if (userChoice == 2) {
+                        encryptCaesarMenu();
+                    } else if (userChoice == 1) {
+                        decryptCaesarMenu();
+                    } else if (userChoice == 0) {
+                        goOn = false;
+                    } else {
+                        System.out.println("Du indtastede: " + userChoice);
+                    }
+                }
             }
-            else if (userChoice == 2){
-                encryptCaesarMenu();
-            }
-            else if (userChoice == 1){
-                decryptCaesarMenu();
-            }
-            else if (userChoice == 0){
-                goOn = false;
+            else if (userMenuChoice == 0) {
+                System.out.println("Farvel");
+                mainMenu = false;
             }
             else{
-                System.out.println("Du indtastede: " + userChoice);
+                System.out.println("Du indtastede " + userMenuChoice);
             }
-        } //Bruger Menu
-        System.out.println("Programmet er afsluttet");
+        }
     }
+
 
     public static void encryptCaesarMenu(){
         Scanner scEncrypt = new Scanner(System.in);
@@ -50,7 +80,7 @@ public class CaesarCipher {
         String resultat = caesarCrypt(userPlaintext,userShift);
         System.out.println("Den enkrypterede besked er: ");
         System.out.println(resultat);
-    } //
+    }
     public static void decryptCaesarMenu(){
         Scanner scDecrypt = new Scanner(System.in);
         System.out.println("Indtast ciphertext:");
@@ -60,7 +90,7 @@ public class CaesarCipher {
         String result = caesarCrypt(userPlaintext,(-userShift));
         System.out.println("Den dekrypterede besked er: ");
         System.out.println(result);
-    } //Den eneste forskel er at der bliver sat "-" foran shiftværdien
+    }
     public static void encryptNumbers(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Indtast sætning der skal krypteres");
