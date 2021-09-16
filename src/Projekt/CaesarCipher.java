@@ -16,7 +16,8 @@ public class CaesarCipher {
                     
                     Vælg en krypteringsmenu
                     2: Tal til tekst kryptering
-                    1: Tekst til tekst kryptering""");
+                    1: Tekst til tekst kryptering
+                    0: Afslut programmet""");
             userMenuChoice = sc.nextInt();
             if (userMenuChoice == 2) {
                 boolean goOn = true;
