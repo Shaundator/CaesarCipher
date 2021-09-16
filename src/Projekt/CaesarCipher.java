@@ -1,5 +1,6 @@
 package Projekt;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CaesarCipher {
@@ -9,10 +10,22 @@ public class CaesarCipher {
         Scanner sc = new Scanner(System.in);
         boolean goOn = true;
         while (goOn) {
-            System.out.println("Indtast et tal\n2: Krypter Besked\n1: Dekrypter Beske\n0: Afslutter programmet: ");
+            System.out.println("""
+                    Indtast et tal:
+                    4: Krypter Besked til Tal
+                    3: Dekrypter Tal til Besked
+                    2: Krypter Besked
+                    1: Dekrypter Besked
+                    0: Afslutter programmet\s""");
             userChoice = sc.nextInt();
 
-            if(userChoice == 2){
+            if(userChoice == 4){
+                encryptNumbers();
+            }
+            else if (userChoice == 3){
+                decryptNumbers();
+            }
+            else if (userChoice == 2){
                 encryptCaesarMenu();
             }
             else if (userChoice == 1){
@@ -29,27 +42,46 @@ public class CaesarCipher {
     }
 
     public static void encryptCaesarMenu(){
-        Scanner scEncryptText = new Scanner(System.in);
-        Scanner scEncryptShift = new Scanner(System.in);
+        Scanner scEncrypt = new Scanner(System.in);
         System.out.println("Indtast plaintext:");
-        String userPlaintext = scEncryptText.nextLine();
+        String userPlaintext = scEncrypt.nextLine();
         System.out.println("Indtast shiftværdi:");
-        int userShift = scEncryptShift.nextInt();
+        int userShift = scEncrypt.nextInt();
         String resultat = caesarCrypt(userPlaintext,userShift);
         System.out.println("Den enkrypterede besked er: ");
         System.out.println(resultat);
-    }
+    } //
     public static void decryptCaesarMenu(){
-        Scanner scDecryptText = new Scanner(System.in);
-        Scanner scDecryptShift = new Scanner(System.in);
+        Scanner scDecrypt = new Scanner(System.in);
         System.out.println("Indtast ciphertext:");
-        String userPlaintext = scDecryptText.nextLine();
+        String userPlaintext = scDecrypt.nextLine();
         System.out.println("Indtast shiftværdi:");
-        int userShift = scDecryptShift.nextInt();
+        int userShift = scDecrypt.nextInt();
         String result = caesarCrypt(userPlaintext,(-userShift));
         System.out.println("Den dekrypterede besked er: ");
         System.out.println(result);
     } //Den eneste forskel er at der bliver sat "-" foran shiftværdien
+    public static void encryptNumbers(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Indtast sætning der skal krypteres");
+        String userText = sc.nextLine();
+        System.out.println("indtast shift værdi"); //test
+        int userShift = sc.nextInt(); //test
+        int[] userNumberCode = textToListOfNumbers(userText);
+        int[] resultat = shiftListOfNumbers(userNumberCode,userShift);
+        System.out.println("Den krypterede kode er: " + Arrays.toString(resultat));
+    }
+    public static void decryptNumbers(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Indtast kode der skal krypteres(brug komma til at splitte tal)");
+        String userNumbers = sc.nextLine();
+        System.out.println("indtast shift værdi");
+        int userShift = sc.nextInt();
+        int[] userNumbers2 = Arrays.stream(userNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
+        int[] resultat = shiftListOfNumbers(userNumbers2,(-userShift));
+        System.out.println("Den krypterede besked er: " + listOfNumbersToText(resultat));
+
+    }
     public static String caesarCrypt( String ciphertext, int shift){
         int[] numberList = textToListOfNumbers(ciphertext);
         int[] numberListShifted = shiftListOfNumbers(numberList,shift);
