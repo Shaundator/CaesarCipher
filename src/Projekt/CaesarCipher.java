@@ -25,14 +25,14 @@ public class CaesarCipher {
                     System.out.println("""
                             
                             Indtast et tal:
-                            1: Dekrypter Besked
-                            2: Krypter Besked
+                            1: Krypter Besked
+                            2: Dekrypter Besked
                             0: Tilbage til hovedmenu\s""");
                     userSubMenu = scanForNumber();
-                    if (userSubMenu == 2) {
+                    if (userSubMenu == 1) {
                         encryptNumbers();
                     }
-                    else if (userSubMenu == 1) {
+                    else if (userSubMenu == 2) {
                         decryptNumbers();
                     }
                     else if (userSubMenu == 0) {
@@ -49,14 +49,14 @@ public class CaesarCipher {
                     System.out.println("""
                             
                             Indtast et tal:
-                            2: Krypter Besked
-                            1: Dekrypter Besked
+                            1: Krypter Besked
+                            2: Dekrypter Besked
                             0: tilbage til hovedmenu\s""");
                     userSubMenu = scanForNumber();
-                    if (userSubMenu == 2) {
+                    if (userSubMenu == 1) {
                         encryptCaesarMenu();
                     }
-                    else if (userSubMenu == 1) {
+                    else if (userSubMenu == 2) {
                         decryptCaesarMenu();
                     }
                     else if (userSubMenu == 0) {
@@ -85,8 +85,7 @@ public class CaesarCipher {
         System.out.println("Indtast shift værdi:");
         int userShift = scanForNumber();
         String result = caesarCrypt(userPlaintext,userShift);
-        System.out.println("Besked er dekrypteret: ");
-        System.out.println(result);
+        System.out.println("Besked er dekrypteret:\n" + result);
     }
     public static void decryptCaesarMenu(){
         Scanner sc = new Scanner(System.in);
@@ -95,8 +94,7 @@ public class CaesarCipher {
         System.out.println("Indtast shiftværdi:");
         int userShift = scanForNumber();
         String result = caesarCrypt(userPlaintext,(-userShift));
-        System.out.println("Den dekrypterede besked er: ");
-        System.out.println(result);
+        System.out.println("Den dekrypterede besked er:\n" + result);
     }
     public static void encryptNumbers(){
         Scanner sc = new Scanner(System.in);
@@ -104,14 +102,13 @@ public class CaesarCipher {
         String userText = sc.nextLine();
         System.out.println("indtast shift værdi");
         int userShift = scanForNumber();
-        int[] userNumberCode = textToListOfNumbers(userText);
-        int[] resultat = shiftListOfNumbers(userNumberCode,userShift);
-        System.out.println("Den krypterede kode er: " + Arrays.toString(resultat));
+        int[] resultat = shiftListOfNumbers(textToListOfNumbers(userText),userShift);
+        System.out.println("Den krypterede kode er:\n" + Arrays.toString(resultat));
     }
     public static void decryptNumbers(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Indtast numre der skal krypteres og afslut med Q");
-        List<Integer> decryptNum = new ArrayList<>();
+        List<Integer> userNumberInput = new ArrayList<>();
         String input;
         while (true) {
             input = sc.nextLine();
@@ -121,12 +118,12 @@ public class CaesarCipher {
             if (!input.matches("\\d+")) {
                 System.out.println("Ugyldig");
             } else {
-                decryptNum.add(Integer.parseInt(input));
+                userNumberInput.add(Integer.parseInt(input));
             }
-        }
+        } //nummer indtasts funktion
         System.out.println("indtast shift værdi");
         int userShift = scanForNumber();
-        int[] userNumbers = decryptNum.stream().mapToInt(i->i).toArray();
+        int[] userNumbers = userNumberInput.stream().mapToInt(i->i).toArray();
         int[] resultat = shiftListOfNumbers(userNumbers,(-userShift));
         System.out.println("Den krypterede besked er:\n" + listOfNumbersToText(resultat));
 
