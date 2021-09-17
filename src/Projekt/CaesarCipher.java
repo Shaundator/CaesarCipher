@@ -15,8 +15,8 @@ public class CaesarCipher {
             System.out.println("""
                     
                     Vælg en krypteringsmenu
-                    2: Tal til tekst kryptering
                     1: Tekst til tekst kryptering
+                    2: Tal til tekst kryptering
                     0: Afslut programmet""");
             userSubMenu = scanForNumber();
             if (userSubMenu == 2) {
@@ -25,8 +25,8 @@ public class CaesarCipher {
                     System.out.println("""
                             
                             Indtast et tal:
-                            2: Krypter Besked
                             1: Dekrypter Besked
+                            2: Krypter Besked
                             0: Tilbage til hovedmenu\s""");
                     userSubMenu = scanForNumber();
                     if (userSubMenu == 2) {
