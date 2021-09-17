@@ -147,7 +147,7 @@ public class CaesarCipher {
         return String.valueOf(tempResultat);
     }
     public static char numberToLetter( int number ) {
-        char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
+        //char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
         return alfabet[number];
     }
     public static int[] textToListOfNumbers( String text ) {
@@ -160,7 +160,7 @@ public class CaesarCipher {
         return resultat;
     }
     public static int letterToNumber( char letter ) {
-        char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
+        //char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
         char capLet = Character.toUpperCase(letter);
         int nummer = 0;
         for (int i = 0; i < alfabet.length; i++){
@@ -184,11 +184,11 @@ public class CaesarCipher {
             return number;
         }
         int shiftedNumber = number + shift;
-        if(shiftedNumber > 29){
-            shiftedNumber = shiftedNumber - 29;
+        if(shiftedNumber > (alfabet.length-1)){
+            shiftedNumber = shiftedNumber - (alfabet.length-1);
         }
         if(shiftedNumber <= 0){
-            shiftedNumber = shiftedNumber + 29;
+            shiftedNumber = shiftedNumber + (alfabet.length-1);
         }
         return shiftedNumber;
     }
@@ -203,4 +203,5 @@ public class CaesarCipher {
         }
         return sc.nextInt();
     }
+    public static char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
 }
