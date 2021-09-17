@@ -205,7 +205,5 @@ public class CaesarCipher {
             sc.next();
         }
         return sc.nextInt();
-
     }
-
 }
