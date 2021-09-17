@@ -80,9 +80,9 @@ public class CaesarCipher {
 
 
     public static void encryptCaesarMenu(){
-        Scanner scEncrypt = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("Indtast plaintext:");
-        String userPlaintext = scEncrypt.nextLine();
+        String userPlaintext = sc.nextLine();
         System.out.println("Indtast shift værdi:");
         int userShift = scanForNumber();
         String resultat = caesarCrypt(userPlaintext,userShift);
