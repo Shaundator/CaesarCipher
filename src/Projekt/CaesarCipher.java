@@ -1,6 +1,8 @@
 package Projekt;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class CaesarCipher {
@@ -104,12 +106,24 @@ public class CaesarCipher {
     }
     public static void decryptNumbers(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Indtast kode der skal krypteres(brug komma til at splitte tal)");
-        String userNumbers = sc.nextLine();
+        System.out.println("Indtast numre der skal krypteres og afslut med Q");
+        List<Integer> decryptNum = new ArrayList<>();
+        String input;
+        while (true) {
+            input = sc.nextLine();
+            if (input.equalsIgnoreCase("Q")) {
+                break;
+            }
+            if (!input.matches("\\d+")) {
+                System.out.println("Ugyldigt Nummer");
+            } else {
+                decryptNum.add(Integer.parseInt(input));
+            }
+        }
         System.out.println("indtast shift værdi");
         int userShift = sc.nextInt();
-        int[] userNumbers2 = Arrays.stream(userNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
-        int[] resultat = shiftListOfNumbers(userNumbers2,(-userShift));
+        int[] userNumbers = decryptNum.stream().mapToInt(i->i).toArray();
+        int[] resultat = shiftListOfNumbers(userNumbers,(-userShift));
         System.out.println("Den krypterede besked er: " + listOfNumbersToText(resultat));
 
     }
