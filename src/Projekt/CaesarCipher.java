@@ -120,7 +120,7 @@ public class CaesarCipher {
             } else {
                 userNumberInput.add(Integer.parseInt(input));
             }
-        } //nummer indtasts funktion
+        } //nummer indtasts funktion, fandt den her online
         System.out.println("indtast shift værdi");
         int userShift = scanForNumber();
         int[] userNumbers = userNumberInput.stream().mapToInt(i->i).toArray();
@@ -147,7 +147,6 @@ public class CaesarCipher {
         return String.valueOf(tempResultat);
     }
     public static char numberToLetter( int number ) {
-        //char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
         return alfabet[number];
     }
     public static int[] textToListOfNumbers( String text ) {
@@ -160,14 +159,13 @@ public class CaesarCipher {
         return resultat;
     }
     public static int letterToNumber( char letter ) {
-        //char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
-        char capLet = Character.toUpperCase(letter);
+        char capLet = Character.toUpperCase(letter); //Fjern den her hvis du vil tilføje små bogstaver til alfabetet
         int nummer = 0;
         for (int i = 0; i < alfabet.length; i++){
             char bogstavViTjekker = alfabet[i];
             if( capLet == bogstavViTjekker) {
                 nummer = i;
-            }
+            } //ændre capLet til letter, hvis du fjerner capLet
         }
         return nummer;
     }
@@ -202,6 +200,6 @@ public class CaesarCipher {
             //Looper ved ugyldigt input, som ikke er et tal
         }
         return sc.nextInt();
-    }
-    public static char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray();
+    } //looper ved ikke int input
+    public static char[] alfabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toCharArray(); //Du kan frit tilføje flere tegn til alfabet, men gå til linje 162 hvis du gør
 }
